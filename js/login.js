@@ -6,7 +6,9 @@ const messageEl = document.querySelector("#message");
 function setMessage(text, type = "info") {
   messageEl.textContent = text;
   messageEl.className =
-    type === "error" ? "text-sm text-red-600" : "text-sm text-green-700";
+    type === "error"
+      ? "text-sm text-red-600"
+      : "text-sm text-green-700";
 }
 
 if (form) {
@@ -29,9 +31,35 @@ if (form) {
       return;
     }
 
-    setMessage("Logged in successfully");
-    console.log("Logged in user:", data.user);
+    const userId = data.user?.id;
 
-     window.location.href = "index.html";
+    if (userId) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("id", userId)
+        .maybeSingle();
+
+      if (!profile) {
+        const pendingDisplayName =
+          localStorage.getItem("pendingDisplayName") ||
+          email.split("@")[0];
+
+        const { error: profileError } = await supabase
+          .from("profiles")
+          .insert([
+            { id: userId, display_name: pendingDisplayName },
+          ]);
+
+        if (profileError) {
+          console.error("Profile creation failed:", profileError);
+        }
+
+        localStorage.removeItem("pendingDisplayName");
+      }
+    }
+
+    setMessage("Login successful! Redirecting...");
+    window.location.href = "index.html";
   });
 }

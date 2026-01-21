@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Article</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="./js/nav.js"></script>
+    <script type="module" src="./js/article.js"></script>
+  </head>
+
+  <body class="bg-gray-50">
+    <header>
+      <h1>News Platform</h1>
+      <nav class="flex gap-4 text-sm">
+        <a class="underline" href="index.html">Home</a>
+
+        <a class="underline" href="login.html" data-guest-only>Login</a>
+        <a class="underline" href="register.html" data-guest-only>Register</a>
+
+        <a class="underline" href="create.html" data-auth-only
+          >Create article</a
+        >
+
+        <button class="underline" type="button" data-auth-only data-logout>
+          Logout
+        </button>
+      </nav>
+    </header>
+    <main class="max-w-3xl mx-auto p-6">
+      <div id="article-container"></div>
+    </main>
+    <footer>
+      <small>Development Platforms – Supabase</small>
+    </footer>
+  </body>
+</html>

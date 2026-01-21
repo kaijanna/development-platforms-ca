@@ -3,46 +3,47 @@
 
 
 ## Pages
-- [ ] Home page shows list of articles (public)
-- [ ] Register page (email + password)
-- [ ] Login page (email + password)
-- [ ] Create article page (auth-protected)
+- [ y] Home page shows list of articles (public)
+- [y ] Register page (email + password)
+- [ y] Login page (email + password)
+- [ y] Create article page (auth-protected)
 
 ---
 
 ## Article content
-- [ ] Title
-- [ ] Body
-- [ ] Category
-- [ ] Submission date (created_at)
+- [y ] Title
+- [y ] Body
+- [ y] Category
+- [y ] Submission date (created_at)
+added name of the writer
 
 ---
 
 ## Supabase Authentication
-- [ ] Supabase project created
-- [ ] Email confirmation enabled
-- [ ] User registration works
-- [ ] User login works
-- [ ] User logout works
+- [y ] Supabase project created
+- [ y] Email confirmation enabled
+- [ y] User registration works
+- [ y] User login works
+- [ y] User logout works
 
 ---
 
 ## Database
-- [ ] Articles table created
-- [ ] Articles linked to logged-in user (author_id)
+- [ y] Articles table created
+- [ y] Articles linked to logged-in user (author_id)
 
 ---
 
 ## Row Level Security (RLS)
-- [ ] Public users can read articles
-- [ ] Authenticated users can create articles
+- [y ] Public users can read articles
+- [y ] Authenticated users can create articles
 - [ ] Users can only edit/delete their own articles
 
 ---
 
 ## UI behavior
-- [ ] Login and register links hidden when logged in
-- [ ] Create article link only visible when logged in
+- [ y] Login and register links hidden when logged in
+- [y ] Create article link only visible when logged in
 
 ---
 

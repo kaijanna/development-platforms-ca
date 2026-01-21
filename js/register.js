@@ -6,7 +6,9 @@ const messageEl = document.querySelector("#message");
 function setMessage(text, type = "info") {
   messageEl.textContent = text;
   messageEl.className =
-    type === "error" ? "text-sm text-red-600" : "text-sm text-green-700";
+    type === "error"
+      ? "text-sm text-red-600"
+      : "text-sm text-green-700";
 }
 
 if (form) {
@@ -16,6 +18,7 @@ if (form) {
     const formData = new FormData(form);
     const email = String(formData.get("email"));
     const password = String(formData.get("password"));
+    const displayName = String(formData.get("display_name"));
 
     setMessage("Creating account...");
 
@@ -29,7 +32,8 @@ if (form) {
       return;
     }
 
-    setMessage("Check your email to confirm your account");
-    console.log("signUp data:", data);
+    localStorage.setItem("pendingDisplayName", displayName);
+
+    setMessage("Account created. Check your email to confirm");
   });
 }
