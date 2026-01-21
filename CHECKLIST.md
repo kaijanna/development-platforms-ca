@@ -37,7 +37,7 @@ added name of the writer
 ## Row Level Security (RLS)
 - [y ] Public users can read articles
 - [y ] Authenticated users can create articles
-- [ ] Users can only edit/delete their own articles
+- [ y] Users can only edit/delete their own articles
 
 ---
 
@@ -48,7 +48,7 @@ added name of the writer
 ---
 
 ## Quality & Delivery
-- [ ] Responsive design (mobile + desktop)
-- [ ] Error messages shown in UI
-- [ ] README includes Motivation section
-- [ ] Project pushed to main branch
+- [y ] Responsive design (mobile + desktop)
+- [ y] Error messages shown in UI
+- [ y] README includes Motivation section
+- [ y] Project pushed to main branch

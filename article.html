@@ -9,29 +9,47 @@
     <script type="module" src="./js/article.js"></script>
   </head>
 
-  <body class="bg-gray-50">
-    <header>
-      <h1>News Platform</h1>
-      <nav class="flex gap-4 text-sm">
-        <a class="underline" href="index.html">Home</a>
+  <body class="min-h-screen flex flex-col bg-gray-50">
+    <header class="border-b bg-white">
+      <div
+        class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <a href="index.html" class="font-serif text-2xl tracking-tight">
+          DungeonNews
+        </a>
 
-        <a class="underline" href="login.html" data-guest-only>Login</a>
-        <a class="underline" href="register.html" data-guest-only>Register</a>
+        <nav class="flex items-center gap-4 text-sm">
+          <a class="hover:underline" href="index.html">Home</a>
 
-        <a class="underline" href="create.html" data-auth-only
-          >Create article</a
-        >
+          <a class="hover:underline" href="login.html" data-guest-only>Login</a>
+          <a class="hover:underline" href="register.html" data-guest-only
+            >Register</a
+          >
 
-        <button class="underline" type="button" data-auth-only data-logout>
-          Logout
-        </button>
-      </nav>
+          <a class="hover:underline" href="create.html" data-auth-only
+            >Create article</a
+          >
+
+          <button
+            class="hover:underline"
+            type="button"
+            data-auth-only
+            data-logout
+          >
+            Logout
+          </button>
+        </nav>
+      </div>
     </header>
-    <main class="max-w-3xl mx-auto p-6">
+    <main class="flex-1 max-w-5xl mx-auto p-6">
       <div id="article-container"></div>
     </main>
-    <footer>
-      <small>Development Platforms – Supabase</small>
+    <footer class="border-t bg-white">
+      <div
+        class="max-w-5xl mx-auto px-6 py-4 text-sm text-gray-500 text-center"
+      >
+        Development Platforms – Supabase
+      </div>
     </footer>
   </body>
 </html>

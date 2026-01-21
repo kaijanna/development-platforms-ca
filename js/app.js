@@ -1,5 +1,7 @@
 import { supabase } from "./supabaseClient.js";
 
+let currentCategory = "all";
+
 function formatDate(isoString) {
   const date = new Date(isoString);
   return date.toLocaleDateString("en-GB", {
@@ -7,6 +9,16 @@ function formatDate(isoString) {
     month: "short",
     day: "2-digit",
   });
+}
+
+function truncateText(text, maxLength = 200) {
+  if (!text) return "";
+
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  return text.slice(0, maxLength) + "...";
 }
 
 function renderArticles(articles) {
@@ -48,15 +60,28 @@ function renderArticles(articles) {
           </p>
         </header>
 
-        <p class="text-gray-700">${article.body}</p>
+          <p class="text-gray-700">
+             ${truncateText(article.body, 200)}
+          </p> 
       </article>
     `;
     })
     .join("");
 }
 
-async function fetchArticles() {
-  const { data, error } = await supabase
+function renderError(message) {
+  const container = document.querySelector("#articles");
+  if (!container) return;
+
+  container.innerHTML = `
+    <p class="text-red-600 text-sm">
+      ${message}
+    </p>
+  `;
+}
+
+async function fetchArticles(category = "all") {
+  let query = supabase
     .from("articles")
     .select(
       `
@@ -72,13 +97,67 @@ async function fetchArticles() {
     )
     .order("created_at", { ascending: false });
 
-  if (error) {
-    console.error("Error fetching articles:", error);
-    renderArticles([]);
-    return;
+  if (category !== "all") {
+    query = query.eq("category", category);
   }
+  const { data, error } = await query;
+
+  if (error) {
+  console.error("Error fetching articles:", error);
+  renderError("Could not load articles. Please try again later.");
+  return;
+}
 
   renderArticles(data);
 }
 
-fetchArticles();
+async function fetchCategories() {
+  const { data, error } = await supabase.from("articles").select("category");
+
+  if (error) {
+    console.error("Error fetching categories:", error);
+    return;
+  }
+
+  renderCategories(data);
+}
+
+function renderCategories(articles) {
+  const container = document.querySelector("#categories");
+  if (!container) return;
+
+  const categories = Array.from(
+    new Set(
+      articles
+        .map((a) => a.category)
+        .filter(Boolean)
+        .map((c) => c.trim().toLowerCase()),
+    ),
+  ).sort();
+
+  const buttons = ["all", ...categories]
+    .map((cat) => {
+      return `
+        <button
+          type="button"
+          data-category="${cat}"
+          class="px-3 py-1 rounded-full border text-sm hover:bg-gray-100"
+        >
+          ${cat}
+        </button>
+      `;
+    })
+    .join("");
+
+  container.innerHTML = buttons;
+  container.querySelectorAll("button[data-category]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const category = button.dataset.category;
+      currentCategory = category;
+      await fetchArticles(category);
+    });
+  });
+}
+
+fetchCategories();
+fetchArticles("all");
