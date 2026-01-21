@@ -1,4 +1,5 @@
 import { supabase } from "./supabaseClient.js";
+import { showError } from "./ui.js";
 
 const container = document.querySelector("#article-container");
 
@@ -34,8 +35,7 @@ async function loadArticle() {
     .single();
 
   if (error) {
-    console.error("Load article error:", error);
-    container.innerHTML = "<p>Could not load article.</p>";
+    showError("Could not load articles. Please try again later.");
     return;
   }
 
@@ -103,8 +103,7 @@ async function deleteArticle(id) {
   const { error } = await supabase.from("articles").delete().eq("id", id);
 
   if (error) {
-    console.error("Delete error:", error);
-    if (messageEl) messageEl.textContent = error.message;
+    showError("Could not delete error. Please try again later.");
     return;
   }
 

@@ -22,7 +22,13 @@ async function initNav() {
   const logoutButton = document.querySelector("[data-logout]");
   if (logoutButton) {
     logoutButton.addEventListener("click", async () => {
-      await supabase.auth.signOut();
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        alert("Could not sign out. Please try again.");
+        return;
+      }
+
       window.location.href = "index.html";
     });
   }

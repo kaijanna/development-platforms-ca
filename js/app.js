@@ -1,4 +1,5 @@
 import { supabase } from "./supabaseClient.js";
+import { showError } from "./ui.js";
 
 let currentCategory = "all";
 
@@ -69,17 +70,6 @@ function renderArticles(articles) {
     .join("");
 }
 
-function renderError(message) {
-  const container = document.querySelector("#articles");
-  if (!container) return;
-
-  container.innerHTML = `
-    <p class="text-red-600 text-sm">
-      ${message}
-    </p>
-  `;
-}
-
 async function fetchArticles(category = "all") {
   let query = supabase
     .from("articles")
@@ -103,10 +93,9 @@ async function fetchArticles(category = "all") {
   const { data, error } = await query;
 
   if (error) {
-  console.error("Error fetching articles:", error);
-  renderError("Could not load articles. Please try again later.");
-  return;
-}
+    showError("Could not load articles. Please try again later.");
+    return;
+  }
 
   renderArticles(data);
 }
@@ -115,7 +104,7 @@ async function fetchCategories() {
   const { data, error } = await supabase.from("articles").select("category");
 
   if (error) {
-    console.error("Error fetching categories:", error);
+    showError("Could not load articles. Please try again later.");
     return;
   }
 

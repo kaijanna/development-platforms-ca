@@ -11,6 +11,7 @@ The project focuses on clear structure, secure data handling, and learning how f
 1. Clone the repository
 2. Open the project in VS Code
 3. Run the project using Live Server or another local server
+4. When registering a new user, you must confirm the account via the email sent by Supabase before logging in.
 
 ## Tech Stack
 - HTML

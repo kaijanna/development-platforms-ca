@@ -4,7 +4,6 @@ export async function getCurrentUser() {
   const { data, error } = await supabase.auth.getUser();
 
   if (error) {
-    console.error("getCurrentUser error:", error);
     return null;
   }
 
@@ -15,7 +14,6 @@ export async function signOut() {
   const { error } = await supabase.auth.signOut();
 
   if (error) {
-    console.error("signOut error:", error);
     return { ok: false, message: error.message };
   }
 

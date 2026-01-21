@@ -6,9 +6,7 @@ const messageEl = document.querySelector("#message");
 function setMessage(text, type = "info") {
   messageEl.textContent = text;
   messageEl.className =
-    type === "error"
-      ? "text-sm text-red-600"
-      : "text-sm text-green-700";
+    type === "error" ? "text-sm text-red-600" : "text-sm text-green-700";
 }
 
 if (form) {
@@ -42,17 +40,17 @@ if (form) {
 
       if (!profile) {
         const pendingDisplayName =
-          localStorage.getItem("pendingDisplayName") ||
-          email.split("@")[0];
+          localStorage.getItem("pendingDisplayName") || email.split("@")[0];
 
         const { error: profileError } = await supabase
           .from("profiles")
-          .insert([
-            { id: userId, display_name: pendingDisplayName },
-          ]);
+          .insert([{ id: userId, display_name: pendingDisplayName }]);
 
         if (profileError) {
-          console.error("Profile creation failed:", profileError);
+          setMessage(
+            "Logged in, but we could not create your profile name. You can try again later.",
+            "error",
+          );
         }
 
         localStorage.removeItem("pendingDisplayName");

@@ -6,9 +6,7 @@ const messageEl = document.querySelector("#message");
 function setMessage(text, type = "info") {
   messageEl.textContent = text;
   messageEl.className =
-    type === "error"
-      ? "text-sm text-red-600"
-      : "text-sm text-green-700";
+    type === "error" ? "text-sm text-red-600" : "text-sm text-green-700";
 }
 
 if (form) {
@@ -20,9 +18,14 @@ if (form) {
     const password = String(formData.get("password"));
     const displayName = String(formData.get("display_name"));
 
+    if (!displayName.trim()) {
+      setMessage("Please enter a display name.", "error");
+      return;
+    }
+
     setMessage("Creating account...");
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     });
