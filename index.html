@@ -16,13 +16,13 @@
   <body class="min-h-screen flex flex-col bg-gray-50">
     <header class="border-b bg-white">
       <div
-        class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"
+        class="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
       >
         <a href="index.html" class="font-serif text-2xl tracking-tight">
           DungeonNews
         </a>
 
-        <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <nav class="flex flex-col items-start gap-2 text-sm md:flex-row md:items-center md:gap-4">
           <a class="hover:underline" href="index.html">Home</a>
 
           <a class="hover:underline" href="login.html" data-guest-only>Login</a>
@@ -47,9 +47,8 @@
     </header>
 
     <main class="flex-1 max-w-5xl mx-auto p-6">
-      <h1 class="sr-only">DungeonNews  Latest news articles</h1>
+      <h1 class="sr-only">DungeonNews Latest news articles</h1>
       <header class="mb-10 border-b pb-6">
-        
         <p class="text-gray-600 max-w-2xl">
           Browse the latest articles across different categories, or sign in to
           submit your own news stories.
